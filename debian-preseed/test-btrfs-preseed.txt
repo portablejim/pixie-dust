@@ -1,0 +1,99 @@
+d-i debian-installer/locale string en_US
+d-i keyboard-configuration/xkb-keymap select us
+d-i netcfg/choose_interface select auto
+
+d-i netcfg/get_hostname string unassigned-hostname
+d-i netcfg/get_domain string unassigned-domain
+#d-i netcfg/hostname string somehost
+#d-i netcfg/dhcp_hostname string radish
+
+# Disable that annoying WEP key dialog.
+d-i netcfg/wireless_wep string
+
+d-i hw-detect/load_firmware boolean false
+d-i mirror/country string manual
+d-i mirror/http/hostname string ftp.debian.org
+d-i mirror/http/directory string /debian
+
+d-i passwd/root-login boolean true
+d-i passwd/root-password-crypted password !invalid
+d-i passwd/make-user boolean false
+
+d-i clock-setup/utc boolean true
+d-i time/zone string Australia/NSW
+d-i clock-setup/ntp boolean true
+d-i clock-setup/ntp-server string pool.ntp.org
+
+#d-i partman-auto/method string regular
+#d-i partman-auto/choose_recipe select atomic
+#d-i partman-auto/disk string /dev/vda
+
+d-i partman-auto/expert_recipe string small-swap : \
+        16384 65536 -1 btrfs \
+            $primary{ } $bootable{ } \
+            method{ format } format{ } \
+            use_filesystem{ } filesystem{ btrfs } \
+            options/compress{ } \
+            mountpoint{ / } . \
+        1024 4096 50% linux-swap \
+            method{ swap } format{ } .
+            
+d-i partman-basicfilesystems/no_swap boolean false
+
+d-i partman-auto-lvm/no_boot boolean false
+d-i partman-lvm/device_remove_lvm boolean true
+d-i partman-md/device_remove_md boolean true
+d-i partman-lvm/confirm boolean true
+d-i partman-lvm/confirm_nooverwrite boolean true
+
+d-i partman-partitioning/confirm_write_new_label boolean true
+d-i partman/choose_partition select finish
+d-i partman/confirm boolean true
+d-i partman/confirm_nooverwrite boolean true
+
+d-i base-installer/kernel/image string linux-image-amd64
+d-i base-installer/install-recommends boolean false
+
+#d-i apt-setup/non-free boolean true
+#d-i apt-setup/contrib boolean true
+#d-i apt-setup/use_mirror boolean false
+
+d-i apt-setup/local0/repository string http://repo.saltstack.com/apt/debian/9/amd64/latest jessie main
+d-i apt-setup/local0/comment string SaltStack official repository
+d-i apt-setup/local0/key string http://repo.saltstack.com/apt/debian/9/amd64/latest/SALTSTACK-GPG-KEY.pub
+d-i apt-setup/local0/source boolean false
+
+tasksel tasksel/first multiselect openssh-server, server, standard
+
+# Individual additional packages to install
+d-i pkgsel/include string vim tmux git salt-client
+        
+# Whether to upgrade packages after debootstrap.
+# Allowed values: none, safe-upgrade, full-upgrade
+d-i pkgsel/upgrade select full-upgrade
+
+# Policy for applying updates. May be "none" (no automatic updates),
+# "unattended-upgrades" (install security updates automatically), or
+# "landscape" (manage system with Landscape).
+d-i pkgsel/update-policy select unattended-upgrades
+
+popularity-contest popularity-contest/participate boolean false
+
+d-i grub-installer/only_debian boolean true
+d-i grub-installer/with_other_os boolean true
+
+d-i finish-install/keep-consoles boolean true
+
+#d-i debian-installer/exit/halt boolean true
+#d-i debian-installer/exit/poweroff boolean true
+#d-i preseed/early_command string /srv/preseed/scripts/early.sh
+#d-i partman/early_command string /srv/preseed/scripts/partman-early.sh
+#d-i preseed/late_command string /srv/preseed/scripts/late.sh
+
+d-i preseed/late_command string \
+    cd /target/root; \
+    mkdir .ssh; \
+    chmod 0700 .ssh; \
+    echo 'SSHKEY' > .ssh/authorized_keys; \
+    chmod 0600 .ssh/authorized_keys; \
+in-target /usr/bin/passwd -l root
