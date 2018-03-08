@@ -94,6 +94,6 @@ d-i preseed/late_command string \
     cd /target/root; \
     mkdir .ssh; \
     chmod 0700 .ssh; \
-    echo 'SSHKEY' > .ssh/authorized_keys; \
+    echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILxh0ABdbGFSn4Kq8z2RICVxVZYZn0Nw8GW6wYy85A6V james@skeleton-windows' > .ssh/authorized_keys; \
     chmod 0600 .ssh/authorized_keys; \
 in-target /usr/bin/passwd -l root
