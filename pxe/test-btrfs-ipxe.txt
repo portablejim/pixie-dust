@@ -3,13 +3,13 @@
 # See: https://github.com/pprince/provis-vultr/blob/master/provis-vultr--jessie-netboot.ipxe
 
 # URL Config
-set  repo-url   http://ftp.debian.org/debian/dists/jessie/main/installer-amd64
+set  repo-url   http://ftp.debian.org/debian/dists/stretch/main/installer-amd64
 set  base-url   ${repo-url}/current/images/netboot/debian-installer/amd64
 
 # Network Config
 ifconf --configurator dhcp net0
 
-kernel ${base-url}/linux preseed/url=https://raw.githubusercontent.com/portablejim/pixie-dust/master/debian-preseed/test-btrfs-preseed.txt interface=auto netcfg/dhcp_timeout=120 console-setup/layoutcode=us debian-installer/allow_unauthenticated_ssl=true
+kernel ${base-url}/linux preseed/url=https://raw.githubusercontent.com/portablejim/pixie-dust/master/debian-preseed/test-btrfs-preseed.txt interface=auto netcfg/dhcp_timeout=120 console-setup/layoutcode=us
 initrd ${base-url}/initrd.gz
 
 boot
