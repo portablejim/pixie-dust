@@ -9,7 +9,7 @@ set  base-url   ${repo-url}/current/images/netboot/debian-installer/amd64
 # Network Config
 ifconf --configurator dhcp net0
 
-kernel ${base-url}/linux preseed/url=https://raw.githubusercontent.com/portablejim/pixie-dust/master/debian-preseed/test-btrfs-preseed.txt interface=auto netcfg/dhcp_timeout=120 console-setup/layoutcode=us
+kernel ${base-url}/linux auto url=https://raw.githubusercontent.com/portablejim/pixie-dust/master/debian-preseed/test-btrfs-preseed.txt interface=auto netcfg/dhcp_timeout=120 console-setup/layoutcode=us
 initrd ${base-url}/initrd.gz
 
 boot
