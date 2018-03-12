@@ -89,7 +89,7 @@ popularity-contest popularity-contest/participate boolean false
 d-i finish-install/keep-consoles boolean true
 
 #d-i debian-installer/exit/halt boolean true
-#d-i debian-installer/exit/poweroff boolean true
+d-i debian-installer/exit/poweroff boolean true
 #d-i preseed/early_command string /srv/preseed/scripts/early.sh
 #d-i partman/early_command string /srv/preseed/scripts/partman-early.sh
 #d-i preseed/late_command string /srv/preseed/scripts/late.sh
@@ -101,4 +101,4 @@ d-i preseed/late_command string \
     echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILxh0ABdbGFSn4Kq8z2RICVxVZYZn0Nw8GW6wYy85A6V james@skeleton-windows' >> .ssh/authorized_keys; \
     echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPcRUSo5AStg2sW+EooUv0t1QlCqjgAohWpxrhDWKF3w james@skeleton' >> .ssh/authorized_keys; \
     chmod 0600 .ssh/authorized_keys; \
-in-target /bin/systemctl start ssh; in-target /usr/bin/passwd -l root
+in-target /bin/systemctl enable ssh; in-target /usr/bin/passwd -l root
