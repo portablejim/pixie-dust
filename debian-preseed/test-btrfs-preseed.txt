@@ -68,7 +68,7 @@ d-i apt-setup/local0/source boolean false
 tasksel tasksel/first multiselect openssh-server, server, standard
 
 # Individual additional packages to install
-d-i pkgsel/include string vim tmux git salt-client
+d-i pkgsel/include string vim tmux git
         
 # Whether to upgrade packages after debootstrap.
 # Allowed values: none, safe-upgrade, full-upgrade
