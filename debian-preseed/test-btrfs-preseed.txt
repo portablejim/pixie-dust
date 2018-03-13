@@ -102,4 +102,5 @@ d-i finish-install/keep-consoles boolean true
 d-i finish-install/reboot_in_progress note
 
 d-i preseed/late_command string \
-    in-target wget -P /tmp/ https://raw.githubusercontent.com/portablejim/pixie-dust/master/scripts/debian-stuff.bash; in-target chmod +x /tmp/debian-stuff.bash; in-target /tmp/debian-stuff.bash;
+    in-target wget -P /tmp/ https://raw.githubusercontent.com/portablejim/pixie-dust/master/scripts/debian-stuff.bash; in-target chmod +x /tmp/debian-stuff.bash; in-target /tmp/debian-stuff.bash;\
+    in-target wget -P /tmp/ https://raw.githubusercontent.com/portablejim/pixie-dust/master/scripts/vultr-stuff.bash; in-target chmod +x /tmp/vultr-stuff.bash; in-target /tmp/vultr-stuff.bash;
