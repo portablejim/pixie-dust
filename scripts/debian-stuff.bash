@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cd /root;
 /bin/mkdir .ssh;
 /bin/chmod 0700 .ssh;
