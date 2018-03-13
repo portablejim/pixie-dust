@@ -19,6 +19,7 @@ d-i mirror/http/directory string /debian
 
 d-i network-console/password-disabled boolean true
 d-i network-console/authorized_keys_url https://raw.githubusercontent.com/portablejim/pixie-dust/master/other/authorized_keys
+d-i passwd/root-login boolean false
 #d-i passwd/root-login boolean true
 #d-i passwd/root-password-crypted password !invalid
 d-i passwd/make-user boolean false
