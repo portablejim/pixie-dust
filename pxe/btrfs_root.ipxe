@@ -9,7 +9,7 @@ set  base-url   ${repo-url}/current/images/netboot/debian-installer/amd64
 # Network Config
 ifconf --configurator dhcp net0
 
-kernel ${base-url}/linux auto=true priority=critical preseed/url=https://raw.githubusercontent.com/portablejim/pixie-dust/master/debian-preseed/test-btrfs-preseed.txt interface=auto console-setup/layoutcode=us console-keymaps-at/keymap=us locale=en_AU
+kernel ${base-url}/linux auto=true priority=critical preseed/url=https://raw.githubusercontent.com/portablejim/pixie-dust/master/debian-preseed/btrfs_root.preseed interface=auto console-setup/layoutcode=us console-keymaps-at/keymap=us locale=en_AU
 initrd ${base-url}/initrd.gz
 
 boot
